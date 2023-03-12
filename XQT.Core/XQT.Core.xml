@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XQT.Core</name>
+    </assembly>
+    <members>
+        <member name="M:XQT.Core.Controllers.AuthController.Login(XQT.Core.Service.AuthLoginDto)">
+            <summary>
+            登录
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

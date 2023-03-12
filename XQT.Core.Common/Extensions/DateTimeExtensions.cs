@@ -19,13 +19,25 @@ namespace XQT.Core.Common
         /// <summary>
         /// 转换为时间戳
         /// </summary>
-        /// <param name="dateTime"></param>
-        /// <param name="milliseconds"></param>
+        /// <param name="dateTime">当前时间</param>
+        /// <param name="milliseconds">是否转为毫秒</param>
         /// <returns></returns>
         public static long ToTimestamp(this DateTime dateTime, bool milliseconds = false)
         {
            var timestamp = dateTime.ToUniversalTime() - timestampStart;
             return (long)(milliseconds ? timestamp.TotalMilliseconds : timestamp.TotalSeconds);
+        }
+
+        /// <summary>
+        /// 获取周几
+        /// </summary>
+        /// <param name="dateTime">当前时间</param>
+        /// <returns></returns>
+        public static string GetWeekName(this DateTime dateTime)
+        {
+            var day = (int)dateTime.DayOfWeek;
+            var week = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
+            return week[day];
         }
     }
 }

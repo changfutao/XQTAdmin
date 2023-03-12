@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XQT.Core.Service</name>
+    </assembly>
+    <members>
+        <member name="T:XQT.Core.Service.AuthLoginDto">
+            <summary>
+            登录验证类
+            </summary>
+        </member>
+        <member name="P:XQT.Core.Service.AuthLoginDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:XQT.Core.Service.AuthLoginDto.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+    </members>
+</doc>
