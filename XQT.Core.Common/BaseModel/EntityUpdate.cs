@@ -10,7 +10,7 @@ namespace XQT.Core.Common
     /// 更新实体
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public class EntityUpdate<TKey> : IEntityUpdate<TKey>
+    public class EntityUpdate<TKey> : IEntityUpdate<TKey> where TKey: struct
     {
         /// <summary>
         /// 修改人Id

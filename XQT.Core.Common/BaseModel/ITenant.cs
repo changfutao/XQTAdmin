@@ -9,8 +9,8 @@ namespace XQT.Core.Common
     /// <summary>
     /// 租户接口
     /// </summary>
-    public interface ITenant<TKey>
+    public interface ITenant<TKey> where TKey : struct
     {
-        TKey TenantId { get; set; }
+        TKey? TenantId { get; set; }
     }
 }

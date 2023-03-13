@@ -10,7 +10,7 @@ namespace XQT.Core.Common
     /// 新增实体接口
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public interface IEntityAdd<TKey>
+    public interface IEntityAdd<TKey> where TKey: struct
     {
         /// <summary>
         /// 创建人Id

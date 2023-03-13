@@ -11,7 +11,7 @@ namespace XQT.Core.Common
         /// <summary>
         /// 创建人Id
         /// </summary>
-        public long CreatedUserId { get; set; }
+        public long? CreatedUserId { get; set; }
         /// <summary>
         /// 创建人名字
         /// </summary>
@@ -23,7 +23,7 @@ namespace XQT.Core.Common
         /// <summary>
         /// 修改人Id
         /// </summary>
-        public long ModifiedUserId { get; set; }
+        public long? ModifiedUserId { get; set; }
         /// <summary>
         /// 修改人名字
         /// </summary>
@@ -39,6 +39,6 @@ namespace XQT.Core.Common
         /// <summary>
         /// 租户Id
         /// </summary>
-        public long TenantId { get; set; }
+        public long? TenantId { get; set; }
     }
 }

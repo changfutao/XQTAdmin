@@ -9,7 +9,7 @@ namespace XQT.Core.Common
     /// <summary>
     /// 更新实体接口
     /// </summary>
-    public interface IEntityUpdate<TKey>
+    public interface IEntityUpdate<TKey> where TKey: struct
     {
         /// <summary>
         /// 修改人Id

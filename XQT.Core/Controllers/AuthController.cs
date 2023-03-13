@@ -15,7 +15,6 @@ namespace XQT.Core.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public IActionResult Login(AuthLoginDto input)
         {
             return null;
