@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using XQT.Core.Common.Output;
 using XQT.Core.Service;
 
 namespace XQT.Core.Controllers
@@ -9,15 +10,22 @@ namespace XQT.Core.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IAuthService _authService;
+
+        public AuthController(IAuthService authService)
+        {
+            _authService = authService;
+        }
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="input">登录信息</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Login(AuthLoginDto input)
+        [AllowAnonymous]
+        public async Task<IResponseOutput> Login(AuthLoginDto input)
         {
-            return null;
+            return await _authService.Login(input);
         }
     }
 }

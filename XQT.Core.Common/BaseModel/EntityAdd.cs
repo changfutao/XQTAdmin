@@ -10,7 +10,7 @@ namespace XQT.Core.Common
     /// 新增实体
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public class EntityAdd<TKey> : IEntityAdd<TKey> where TKey: struct
+    public class EntityAdd<TKey> : Entity<TKey>, IEntityAdd<TKey> where TKey: struct
     {
         /// <summary>
         /// 创建人Id

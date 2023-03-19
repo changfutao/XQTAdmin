@@ -4,6 +4,13 @@
         <name>XQT.Core.Service</name>
     </assembly>
     <members>
+        <member name="M:XQT.Core.Service.AuthService.Login(XQT.Core.Service.AuthLoginDto)">
+            <summary>
+            登录
+            </summary>
+            <param name="input">登录信息</param>
+            <returns></returns>
+        </member>
         <member name="T:XQT.Core.Service.AuthLoginDto">
             <summary>
             登录验证类

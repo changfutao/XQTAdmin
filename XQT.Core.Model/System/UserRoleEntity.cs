@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,21 @@ using XQT.Core.Common;
 
 namespace XQT.Core.Model
 {
-    public class UserRoleEntity : Entity, IEntityAdd<long>
+    /// <summary>
+    /// 用户角色表
+    /// </summary>
+    [Comment("用户角色表")]
+    public class UserRoleEntity : EntityAdd<long>
     {
-        public long? CreatedUserId { get; set; }
-        public string? CreatedUserName { get; set; }
-        public DateTime? CreatedTime { get; set; }
+        /// <summary>
+        /// 用户Id
+        /// </summary>
+        [Comment("用户Id")]
+        public long UserId { get; set; }
+        /// <summary>
+        /// 角色Id
+        /// </summary>
+        [Comment("角色Id")]
+        public long RoleId { get; set; }
     }
 }

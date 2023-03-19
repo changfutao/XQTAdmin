@@ -8,8 +8,13 @@
             <summary>
             登录
             </summary>
-            <param name="input"></param>
+            <param name="input">登录信息</param>
             <returns></returns>
+        </member>
+        <member name="M:XQT.Core.RegisterModules.ControllerModule.#ctor">
+            <summary>
+            控制器注入
+            </summary>
         </member>
     </members>
 </doc>

@@ -1,12 +1,15 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using XQT.Core.Common;
+using XQT.Core.EntityFramework;
+using XQT.Core.RegisterModules;
 using Yitter.IdGenerator;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +28,13 @@ builder.Services.TryAddSingleton(jwtConfig);
 // 雪花算法生成主键
 var options = new IdGeneratorOptions(1) { WorkerIdBitLength = 6 };
 YitIdHelper.SetIdGenerator(options);
+#endregion
+
+#region EFCore
+builder.Services.AddDbContext<XQTContext>(options =>
+{
+    options.UseSqlServer("name=ConnectionStrings:DefaultConnection", o => o.MigrationsAssembly("XQT.Core.EntityFramework"));
+});
 #endregion
 
 #region 控制器
@@ -110,6 +120,25 @@ host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder =>
     {
         // 向Autofac容器注入  
+        try
+        {
+            // 控制器注入
+            builder.RegisterModule(new ControllerModule());
+
+            // 服务注入
+            builder.RegisterModule<ServiceModule>();
+
+            // 仓储注入
+            builder.RegisterModule<RepositoryModule>();
+
+            // 单例注入
+            builder.RegisterModule<SingleInstanceModule>();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     });
 
 
