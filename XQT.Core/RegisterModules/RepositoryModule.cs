@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using System.Reflection;
-using XQT.Core.Repository;
-using XQT.Core.Repository.BASE;
 using Module = Autofac.Module;
 
 namespace XQT.Core.RegisterModules
@@ -18,7 +16,7 @@ namespace XQT.Core.RegisterModules
                    
 
             // 泛型注入
-            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerLifetimeScope();
+          //  builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerLifetimeScope();
         }
     }
 }

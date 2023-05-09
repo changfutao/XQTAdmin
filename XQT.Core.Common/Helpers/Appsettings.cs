@@ -60,7 +60,7 @@ namespace XQT.Core.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="sections"></param>
         /// <returns></returns>
-        public static List<T> app<T>(params string[] sections) 
+        public static List<T> app<T>(params string[] sections) where T: class
         {
             List<T> list = new List<T>();
             try

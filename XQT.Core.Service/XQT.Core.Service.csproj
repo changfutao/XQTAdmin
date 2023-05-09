@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XQT.Core.Repository\XQT.Core.Repository.csproj" />
+    <ProjectReference Include="..\XQT.Core.EntityFramework\XQT.Core.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,8 +12,8 @@ using XQT.Core.EntityFramework;
 namespace XQT.Core.EntityFramework.Migrations
 {
     [DbContext(typeof(XQTContext))]
-    [Migration("20230318113322_v1.0.1")]
-    partial class v101
+    [Migration("20230404122413_v1.0.0")]
+    partial class v100
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,94 @@ namespace XQT.Core.EntityFramework.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("XQT.Core.Model.MenuEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatedUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Icon")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasComment("图标");
+
+                    b.Property<bool>("IsButton")
+                        .HasColumnType("bit")
+                        .HasComment("是否按钮");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("bit")
+                        .HasComment("是否隐藏");
+
+                    b.Property<bool>("IsOpenWindow")
+                        .HasColumnType("bit")
+                        .HasComment("是否开启新窗口");
+
+                    b.Property<string>("MenuCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("菜单编码");
+
+                    b.Property<string>("MenuName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("菜单名称");
+
+                    b.Property<string>("MenuPath")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("权限地址");
+
+                    b.Property<DateTime?>("ModifiedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("ModifiedUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Remark")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasComment("备注");
+
+                    b.Property<string>("RoutePath")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("路由地址");
+
+                    b.Property<long?>("TenantId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("sys_menu", null, t =>
+                        {
+                            t.HasComment("菜单表");
+                        });
+                });
 
             modelBuilder.Entity("XQT.Core.Model.RoleEntity", b =>
                 {
@@ -86,9 +174,45 @@ namespace XQT.Core.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("sys_role", null, t =>
                         {
                             t.HasComment("角色表");
+                        });
+                });
+
+            modelBuilder.Entity("XQT.Core.Model.RoleMenuEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatedUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<long>("MenuId")
+                        .HasColumnType("bigint")
+                        .HasComment("菜单Id");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint")
+                        .HasComment("角色Id");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("sys_role_menu", null, t =>
+                        {
+                            t.HasComment("角色菜单表");
                         });
                 });
 
@@ -168,6 +292,8 @@ namespace XQT.Core.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("sys_user", null, t =>
                         {
                             t.HasComment("用户表");
@@ -177,7 +303,7 @@ namespace XQT.Core.EntityFramework.Migrations
                         new
                         {
                             Id = 123123123L,
-                            CreatedTime = new DateTime(2023, 3, 18, 19, 33, 22, 365, DateTimeKind.Local).AddTicks(4014),
+                            CreatedTime = new DateTime(2023, 4, 4, 20, 24, 13, 741, DateTimeKind.Local).AddTicks(7664),
                             CreatedUserId = 123123123L,
                             CreatedUserName = "admin",
                             IsDeleted = false,

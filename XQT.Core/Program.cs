@@ -18,6 +18,12 @@ builder.Services.AddSingleton(new Appsettings(builder.Configuration));
 var configHelper = new ConfigHelper();
 // 应用程序根路径
 var basePath = AppContext.BaseDirectory;
+
+#region 用户信息
+builder.Services.AddHttpContextAccessor();
+// builder.Services.TryAddSingleton<I>
+#endregion
+
 #region Jwt配置信息
 // Jwt配置信息
 var jwtConfig = configHelper.Get<JwtConfig>("jwtconfig", builder.Environment.EnvironmentName);
@@ -31,10 +37,16 @@ YitIdHelper.SetIdGenerator(options);
 #endregion
 
 #region EFCore
-builder.Services.AddDbContext<XQTContext>(options =>
+builder.Services.AddDbContextPool<XQTContext>(options =>
 {
     options.UseSqlServer("name=ConnectionStrings:DefaultConnection", o => o.MigrationsAssembly("XQT.Core.EntityFramework"));
 });
+
+#endregion
+
+#region MiniProfiler
+// 可以使用/profiler/results访问分析报告
+builder.Services.AddMiniProfiler(options => options.RouteBasePath = "/profiler");
 #endregion
 
 #region 控制器
@@ -53,22 +65,22 @@ builder.Services.AddAuthentication(options =>
     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecurityKey));
     options.TokenValidationParameters = new TokenValidationParameters
     {
-       // 是否验证密钥
-       ValidateIssuerSigningKey = true,
-       // 密钥
-       IssuerSigningKey = key,
-       // 是否验证颁发人
-       ValidateIssuer = true,
-       // 颁发人
-       ValidIssuer = jwtConfig.Issuer,
-       // 是否验证订阅
-       ValidateAudience = true,
-       // 订阅人
-       ValidAudience = jwtConfig.Audience,
-       ValidateLifetime = true,
-       //这个是缓冲过期时间，也就是说，即使我们配置了过期时间，这里也要考虑进去，过期时间+缓冲，默认好像是7分钟，你可以直接设置为0
-       ClockSkew = TimeSpan.Zero,
-       RequireExpirationTime = true
+        // 是否验证密钥
+        ValidateIssuerSigningKey = true,
+        // 密钥
+        IssuerSigningKey = key,
+        // 是否验证颁发人
+        ValidateIssuer = true,
+        // 颁发人
+        ValidIssuer = jwtConfig.Issuer,
+        // 是否验证订阅
+        ValidateAudience = true,
+        // 订阅人
+        ValidAudience = jwtConfig.Audience,
+        ValidateLifetime = true,
+        //这个是缓冲过期时间，也就是说，即使我们配置了过期时间，这里也要考虑进去，过期时间+缓冲，默认好像是7分钟，你可以直接设置为0
+        ClockSkew = TimeSpan.Zero,
+        RequireExpirationTime = true
     };
 });
 
@@ -115,6 +127,31 @@ builder.Services.AddSwaggerGen(options =>
 });
 #endregion
 
+#region Cors
+var corUrls = Appsettings.app<string>("corUrls");
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Default", policy =>
+    {
+        if (corUrls.Any())
+        {
+            policy.WithOrigins(corUrls.ToArray());
+        }
+        else
+        {
+            policy.AllowAnyOrigin();
+        }
+        policy.AllowAnyHeader()
+              .AllowAnyMethod();
+        if (corUrls.Any())
+        {
+            policy.AllowCredentials();
+        }
+    });
+});
+#endregion
+
+#region Autofac
 // 替换默认依赖注入容器
 host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder =>
@@ -129,7 +166,7 @@ host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
             builder.RegisterModule<ServiceModule>();
 
             // 仓储注入
-            builder.RegisterModule<RepositoryModule>();
+            // builder.RegisterModule<RepositoryModule>();
 
             // 单例注入
             builder.RegisterModule<SingleInstanceModule>();
@@ -141,6 +178,7 @@ host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
         }
     });
 
+#endregion
 
 var app = builder.Build();
 
@@ -158,7 +196,9 @@ if (builder.Environment.IsDevelopment())
 }
 #endregion
 
+app.UseMiniProfiler();
 app.UseRouting();
+app.UseCors("Default");
 // 先开启认证
 app.UseAuthentication();
 // 再授权
@@ -167,4 +207,4 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-app.Run();
+app.Run(Appsettings.app("urls"));

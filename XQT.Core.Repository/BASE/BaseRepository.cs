@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XQT.Core.EntityFramework;
 
-namespace XQT.Core.Repository.BASE
+namespace XQT.Core.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
@@ -18,7 +18,7 @@ namespace XQT.Core.Repository.BASE
         {
             _context = xqtContext;
         }
-        protected XQTContext DbContext()
+        public XQTContext DbContext()
         {
             return _context;
         }
@@ -105,7 +105,7 @@ namespace XQT.Core.Repository.BASE
             }
         }
 
-        public Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        public Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             return _context.Set<TEntity>().Where(predicate).SingleOrDefaultAsync(cancellationToken);
         }

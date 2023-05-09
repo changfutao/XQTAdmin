@@ -42,8 +42,8 @@ namespace XQT.Core.Common
                 issuer: _jwtConfig.Issuer, 
                 audience: _jwtConfig.Audience, 
                 claims: claims, 
-                notBefore: DateTime.Now, 
-                expires: DateTime.Now.AddMinutes(_jwtConfig.Expires), 
+                notBefore: DateTime.Now, // netBefore 表示JWT生效时间
+                expires: DateTime.Now.AddMinutes(_jwtConfig.Expires), // 过期时间
                 signingCredentials: signingCredentials
                 );
 

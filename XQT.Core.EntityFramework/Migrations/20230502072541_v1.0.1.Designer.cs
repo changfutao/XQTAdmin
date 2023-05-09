@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using XQT.Core.EntityFramework;
 
@@ -11,9 +12,11 @@ using XQT.Core.EntityFramework;
 namespace XQT.Core.EntityFramework.Migrations
 {
     [DbContext(typeof(XQTContext))]
-    partial class XQTContextModelSnapshot : ModelSnapshot
+    [Migration("20230502072541_v1.0.1")]
+    partial class v101
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +118,7 @@ namespace XQT.Core.EntityFramework.Migrations
                         new
                         {
                             Id = 123989081921L,
-                            CreatedTime = new DateTime(2023, 5, 9, 18, 7, 27, 128, DateTimeKind.Local).AddTicks(3285),
+                            CreatedTime = new DateTime(2023, 5, 2, 15, 25, 41, 360, DateTimeKind.Local).AddTicks(5822),
                             CreatedUserId = 123123123L,
                             CreatedUserName = "admin",
                             IsDeleted = false,
@@ -131,7 +134,7 @@ namespace XQT.Core.EntityFramework.Migrations
                         new
                         {
                             Id = 123989081922L,
-                            CreatedTime = new DateTime(2023, 5, 9, 18, 7, 27, 128, DateTimeKind.Local).AddTicks(3326),
+                            CreatedTime = new DateTime(2023, 5, 2, 15, 25, 41, 360, DateTimeKind.Local).AddTicks(5829),
                             CreatedUserId = 123123123L,
                             CreatedUserName = "admin",
                             IsDeleted = false,
@@ -143,22 +146,6 @@ namespace XQT.Core.EntityFramework.Migrations
                             MenuType = 1,
                             ParentId = 123989081921L,
                             RoutePath = "system/user"
-                        },
-                        new
-                        {
-                            Id = 123989081923L,
-                            CreatedTime = new DateTime(2023, 5, 9, 18, 7, 27, 128, DateTimeKind.Local).AddTicks(3329),
-                            CreatedUserId = 123123123L,
-                            CreatedUserName = "admin",
-                            IsDeleted = false,
-                            IsHidden = false,
-                            IsOpenWindow = false,
-                            MenuCode = "api:user:add",
-                            MenuName = "添加",
-                            MenuPath = "",
-                            MenuType = 2,
-                            ParentId = 123989081922L,
-                            RoutePath = ""
                         });
                 });
 
@@ -235,7 +222,7 @@ namespace XQT.Core.EntityFramework.Migrations
                         {
                             Id = 12312534123L,
                             Code = "admin",
-                            CreatedTime = new DateTime(2023, 5, 9, 18, 7, 27, 128, DateTimeKind.Local).AddTicks(859),
+                            CreatedTime = new DateTime(2023, 5, 2, 15, 25, 41, 360, DateTimeKind.Local).AddTicks(3397),
                             CreatedUserId = 123123123L,
                             CreatedUserName = "admin",
                             IsDeleted = false,
@@ -366,7 +353,7 @@ namespace XQT.Core.EntityFramework.Migrations
                         new
                         {
                             Id = 123123123L,
-                            CreatedTime = new DateTime(2023, 5, 9, 18, 7, 27, 128, DateTimeKind.Local).AddTicks(7369),
+                            CreatedTime = new DateTime(2023, 5, 2, 15, 25, 41, 361, DateTimeKind.Local).AddTicks(40),
                             CreatedUserId = 123123123L,
                             CreatedUserName = "admin",
                             IsDeleted = false,
@@ -413,7 +400,7 @@ namespace XQT.Core.EntityFramework.Migrations
                         new
                         {
                             Id = 1231209887L,
-                            CreatedTime = new DateTime(2023, 5, 9, 18, 7, 27, 128, DateTimeKind.Local).AddTicks(9082),
+                            CreatedTime = new DateTime(2023, 5, 2, 15, 25, 41, 361, DateTimeKind.Local).AddTicks(1770),
                             CreatedUserId = 123123123L,
                             CreatedUserName = "admin",
                             RoleId = 12312534123L,

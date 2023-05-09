@@ -21,5 +21,17 @@ namespace System.Linq.Expressions
         {
             return condition ? query.Where(predicate) : query;
         }
+
+        public static IOrderedQueryable<T> SortBy<T>(this IQueryable<T> query, Expression<Func<T, string>> sortField, string sort)
+        {
+            if (sort.Equals("desc", StringComparison.OrdinalIgnoreCase))
+            {
+                return query.OrderByDescending(sortField);
+            }
+            else
+            {
+                return query.OrderBy(sortField);
+            }
+        }
     }
 }

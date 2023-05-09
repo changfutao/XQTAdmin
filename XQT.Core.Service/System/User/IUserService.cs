@@ -7,8 +7,8 @@ using XQT.Core.Common;
 
 namespace XQT.Core.Service
 {
-    public interface IAuthService
+    public interface IUserService
     {
-        Task<IResponseOutput> LoginAsync(AuthLoginDto input);
+        Task<IResponseOutput> GetPageAsync(PageInput<UserPageDto> dto);
     }
 }

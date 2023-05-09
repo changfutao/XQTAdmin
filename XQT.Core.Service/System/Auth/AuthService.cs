@@ -1,25 +1,25 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using XQT.Core.Common;
-using XQT.Core.Common.Output;
+using XQT.Core.EntityFramework;
 using XQT.Core.Model;
-using XQT.Core.Repository;
 
 namespace XQT.Core.Service
 {
     public class AuthService : IAuthService
     {
-        private readonly IBaseRepository<UserEntity> _baseUserRepository;
         private readonly IUserToken _userToken;
+        private readonly XQTContext _context;
 
-        public AuthService(IBaseRepository<UserEntity> baseUserRepository, IUserToken userToken)
+        public AuthService(IUserToken userToken, XQTContext context)
         {
-            _baseUserRepository = baseUserRepository;
             _userToken = userToken;
+            _context = context;
         }
 
         /// <summary>
@@ -27,14 +27,14 @@ namespace XQT.Core.Service
         /// </summary>
         /// <param name="input">登录信息</param>
         /// <returns></returns>
-        public async Task<IResponseOutput> Login(AuthLoginDto input)
+        public async Task<IResponseOutput> LoginAsync(AuthLoginDto input)
         {
-            var user = await _baseUserRepository.FindAsync(a => a.UserName == input.UserName);
+            var user = await _context.UserEntities.FirstOrDefaultAsync(a => a.UserName == input.UserName);
             if (user == null)
             {
-                ResponseOutput.NotOk<string>("用户名或密码错误");
+               return ResponseOutput.NotOk<string>("用户名或密码错误");
             }
-            if (!user.Password.Equals(MD5Encrypt.MD5Encrypt32(input.PassWord)))
+            if (!user.Password.Equals(input.PassWord))
             {
                 ResponseOutput.NotOk<string>("用户名或密码错误");
             }

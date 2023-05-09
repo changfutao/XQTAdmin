@@ -11,6 +11,13 @@
             <param name="input">登录信息</param>
             <returns></returns>
         </member>
+        <member name="M:XQT.Core.Controllers.UserController.GetPage(XQT.Core.Common.PageInput{XQT.Core.Service.UserPageDto})">
+            <summary>
+            分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:XQT.Core.RegisterModules.ControllerModule.#ctor">
             <summary>
             控制器注入

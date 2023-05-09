@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XQT.Core.Common.Output
+namespace XQT.Core.Common
 {
     /// <summary>
     /// 响应数据输出接口

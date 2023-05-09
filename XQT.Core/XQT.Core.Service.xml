@@ -4,7 +4,7 @@
         <name>XQT.Core.Service</name>
     </assembly>
     <members>
-        <member name="M:XQT.Core.Service.AuthService.Login(XQT.Core.Service.AuthLoginDto)">
+        <member name="M:XQT.Core.Service.AuthService.LoginAsync(XQT.Core.Service.AuthLoginDto)">
             <summary>
             登录
             </summary>
@@ -25,6 +25,23 @@
             <summary>
             密码
             </summary>
+        </member>
+        <member name="P:XQT.Core.Service.UserPageDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:XQT.Core.Service.UserPageDto.UserStatus">
+            <summary>
+            用户状态
+            </summary>
+        </member>
+        <member name="M:XQT.Core.Service.UserService.GetPageAsync(XQT.Core.Common.PageInput{XQT.Core.Service.UserPageDto})">
+            <summary>
+            分页
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

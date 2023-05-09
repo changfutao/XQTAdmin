@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using XQT.Core.Common.Output;
+using XQT.Core.Common;
 using XQT.Core.Service;
 
 namespace XQT.Core.Controllers
@@ -25,7 +25,7 @@ namespace XQT.Core.Controllers
         [AllowAnonymous]
         public async Task<IResponseOutput> Login(AuthLoginDto input)
         {
-            return await _authService.Login(input);
+            return await _authService.LoginAsync(input);
         }
     }
 }

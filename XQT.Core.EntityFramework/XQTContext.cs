@@ -21,6 +21,8 @@ namespace XQT.Core.EntityFramework
         public DbSet<UserEntity> UserEntities { get; set; }
         public DbSet<RoleEntity> RoleEntities { get; set; }
         public DbSet<UserRoleEntity> UserRoleEntities { get; set; }
+        public DbSet<MenuEntity> MenuEntities { get; set; }
+        public DbSet<RoleMenuEntity> RoleMenuEntities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

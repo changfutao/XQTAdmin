@@ -9,11 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XQT.Core.Common", "XQT.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XQT.Core.Model", "XQT.Core.Model\XQT.Core.Model.csproj", "{78CA6480-ADCE-4FBD-9B98-A49ACC8FEEC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XQT.Core.Repository", "XQT.Core.Repository\XQT.Core.Repository.csproj", "{7E71118A-D2B1-46A8-96C2-635601A5F788}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XQT.Core.Service", "XQT.Core.Service\XQT.Core.Service.csproj", "{BAB0066B-7023-4B0C-B889-E2553F850CD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XQT.Core.EntityFramework", "XQT.Core.EntityFramework\XQT.Core.EntityFramework.csproj", "{3ED5D243-0F05-4B43-B6A2-3F2F11C638AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XQT.Core.EntityFramework", "XQT.Core.EntityFramework\XQT.Core.EntityFramework.csproj", "{3ED5D243-0F05-4B43-B6A2-3F2F11C638AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +31,6 @@ Global
 		{78CA6480-ADCE-4FBD-9B98-A49ACC8FEEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78CA6480-ADCE-4FBD-9B98-A49ACC8FEEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78CA6480-ADCE-4FBD-9B98-A49ACC8FEEC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E71118A-D2B1-46A8-96C2-635601A5F788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E71118A-D2B1-46A8-96C2-635601A5F788}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E71118A-D2B1-46A8-96C2-635601A5F788}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E71118A-D2B1-46A8-96C2-635601A5F788}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAB0066B-7023-4B0C-B889-E2553F850CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAB0066B-7023-4B0C-B889-E2553F850CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB0066B-7023-4B0C-B889-E2553F850CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU

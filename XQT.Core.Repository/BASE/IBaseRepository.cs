@@ -4,11 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using XQT.Core.EntityFramework;
 
 namespace XQT.Core.Repository
 {
     public interface IBaseRepository<TEntity> where TEntity: class
     {
+        XQTContext DbContext();
         Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
         Task InsertManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
         Task<TEntity> UpdateAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
