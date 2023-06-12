@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
@@ -19,10 +20,7 @@ var configHelper = new ConfigHelper();
 // 应用程序根路径
 var basePath = AppContext.BaseDirectory;
 
-#region 用户信息
 builder.Services.AddHttpContextAccessor();
-// builder.Services.TryAddSingleton<I>
-#endregion
 
 #region Jwt配置信息
 // Jwt配置信息
@@ -180,20 +178,37 @@ host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 
 #endregion
 
+#region 对模型验证进行自定义统一的返回格式
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = actionContext =>
+    {
+        // 获取验证失败时的模型字段的错误消息
+        var errors = actionContext.ModelState
+                 .Where(a => a.Value?.Errors?.Count > 0)
+                 .Select(a => a.Value?.Errors.FirstOrDefault()?.ErrorMessage)
+                 .ToList();
+        string errMsg = string.Join("|", errors);
+        var result = ResponseOutput.NotOk<string>(errMsg);
+        return new BadRequestObjectResult(result);
+    };
+});
+#endregion
+
 var app = builder.Build();
 
 #region Swagger中间件
 // 只有测试环境开启Swagger
-if (builder.Environment.IsDevelopment())
+//if (builder.Environment.IsDevelopment())
+//{
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        // 路径配置，设置为空，表示直接在根域名（localhost:8001）访问该文件,注意localhost:8001/swagger是访问不到的，去launchSettings.json把launchUrl去掉(这样一打开根路径直接跳转到swagger页面)
-        options.RoutePrefix = "";
-    });
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    // 路径配置，设置为空，表示直接在根域名（localhost:8001）访问该文件,注意localhost:8001/swagger是访问不到的，去launchSettings.json把launchUrl去掉(这样一打开根路径直接跳转到swagger页面)
+    options.RoutePrefix = "";
+});
+//}
 #endregion
 
 app.UseMiniProfiler();

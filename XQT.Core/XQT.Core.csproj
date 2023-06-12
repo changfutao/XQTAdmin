@@ -34,4 +34,8 @@
     <ProjectReference Include="..\XQT.Core.Service\XQT.Core.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+  </ItemGroup>
+
 </Project>
